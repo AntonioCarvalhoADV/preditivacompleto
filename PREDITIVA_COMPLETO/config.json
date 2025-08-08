@@ -1,0 +1,56 @@
+{
+  "projeto": {
+    "nome": "PREDITIVA",
+    "versao": "1.0.0",
+    "descricao": "Sistema integrado de gestão jurídica com IA",
+    "autor": "Dr. Antonio AI",
+    "data_criacao": "2025-06-28"
+  },
+  "modulos": {
+    "analise_financeira": {
+      "ativo": true,
+      "arquivo_entrada": "MOVIMENTAÇÃO FINANCEIRA (1).xlsx",
+      "arquivo_saida": "analise_financeira.json"
+    },
+    "analise_processos": {
+      "ativo": true,
+      "arquivo_entrada": "PROCESSOS 10.xlsx",
+      "arquivo_saida": "analise_processos.json"
+    },
+    "crm": {
+      "ativo": true,
+      "arquivo_dados": "crm_data.json"
+    },
+    "distribuicao_tarefas": {
+      "ativo": true,
+      "arquivo_equipe": "team_data.csv",
+      "arquivo_tarefas": "tasks_input.json",
+      "arquivo_saida": "tarefas_semana.json"
+    },
+    "nucleo_estrategico_pecas": {
+      "ativo": true,
+      "diretorio_saida": "pecas_processadas"
+    }
+  },
+  "configuracoes": {
+    "encoding": "utf-8",
+    "timezone": "America/Sao_Paulo",
+    "formato_data": "%d/%m/%Y",
+    "formato_data_hora": "%d/%m/%Y %H:%M:%S"
+  },
+  "sistemas": {
+    "juridico": {
+      "ativo": true,
+      "modulos": ["analise_processos", "nucleo_estrategico_pecas", "crm"]
+    },
+    "contabil": {
+      "ativo": true,
+      "modulos": ["analise_financeira"]
+    },
+    "empresas": {
+      "ativo": true,
+      "modulos": ["crm", "distribuicao_tarefas"]
+    }
+  }
+}
+

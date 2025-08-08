@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PREDITIVA - Dashboard Executivo</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PJ</div>
+      <div class="title">
+        <strong>Preditiva Jurídica</strong>
+        <span class="subtitle">Centro de Comando</span>
+      </div>
+    </div>
+    <div class="status">
+      <span id="server-status" class="status-dot green"></span>
+      <span class="status-label">Servidor</span>
+      <span class="divider">|</span>
+      <span id="services-count">0</span> serviços ativos
+    </div>
+    <div class="search">
+      <input id="global-search" type="search" placeholder="Pesquisar: clientes, processos, documentos..." />
+      <div id="search-results" class="search-results hidden"></div>
+    </div>
+    <div class="user">
+      <img src="https://i.pravatar.cc/40" alt="Avatar" class="avatar" />
+      <div class="user-meta">
+        <div class="name">Gestor Executivo</div>
+        <div class="role">Admin</div>
+      </div>
+      <button id="logout" class="btn btn-ghost">Sair</button>
+      <div class="clock">
+        <span id="clock-time">--:--:--</span>
+        <span id="clock-date"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="notifications" id="notifications"></section>
+
+    <section class="overview">
+      <h2>Visão Geral</h2>
+      <div class="filters">
+        <label>
+          Período
+          <select id="filter-period">
+            <option value="7d">7 dias</option>
+            <option value="30d">30 dias</option>
+            <option value="90d">90 dias</option>
+            <option value="12m" selected>12 meses</option>
+          </select>
+        </label>
+        <button id="btn-tv" class="btn btn-ghost">Modo TV</button>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="label">Novos Leads</div>
+          <div class="value" id="kpi-leads">--</div>
+          <div class="meta" id="kpi-leads-meta">Hoje / Semana / Mês</div>
+        </div>
+        <div class="card">
+          <div class="label">Novos Processos</div>
+          <div class="value" id="kpi-processos">--</div>
+          <div class="meta">Cadastrados ou detectados</div>
+        </div>
+        <div class="card">
+          <div class="label">Prazos a Vencer</div>
+          <div class="value" id="kpi-prazos">--</div>
+          <div class="meta">Com contagem regressiva</div>
+        </div>
+        <div class="card">
+          <div class="label">Documentos Pendentes</div>
+          <div class="value" id="kpi-docs">--</div>
+          <div class="meta">Análise / Assinatura</div>
+        </div>
+        <div class="card">
+          <div class="label">Faturamento Previsto</div>
+          <div class="value" id="kpi-faturamento">--</div>
+          <div class="meta">Última análise</div>
+        </div>
+        <div class="card">
+          <div class="label">Serviços no PM2</div>
+          <div class="value" id="kpi-servicos">--</div>
+          <div class="meta">Quantidade e status</div>
+        </div>
+        <div class="card">
+          <div class="label">Alertas de Risco</div>
+          <div class="value" id="kpi-alertas">--</div>
+          <div class="meta">Críticos e integrações</div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Faturamento (mensal)</h3>
+        <canvas id="chart-revenue" height="120"></canvas>
+      </div>
+    </section>
+
+    <section class="modules">
+      <h2>Visão por Módulo</h2>
+      <div class="grid" id="modules-grid">
+        <button class="widget" data-module="crm">CRM Enterprise</button>
+        <button class="widget" data-module="processos">Processos</button>
+        <button class="widget" data-module="financeiro">Financeiro</button>
+        <button class="widget" data-module="documentos">Documentos</button>
+        <button class="widget" data-module="jurisprudencia">Jurisprudência</button>
+        <button class="widget" data-module="monitoramento">Monitoramento Automatizado</button>
+        <button class="widget" data-module="agenda">Agenda/Audiências</button>
+        <button class="widget" data-module="tributario">Tributário</button>
+        <button class="widget" data-module="trabalhista">Trabalhista</button>
+        <button class="widget" data-module="previdenciario">Previdenciário</button>
+        <button class="widget" data-module="criminal">Criminal</button>
+        <button class="widget" data-module="relatorios">Relatórios Estratégicos</button>
+        <button class="widget" data-module="controle_interno">Controle Interno</button>
+        <button class="widget" data-module="integracoes">Integrações Externas</button>
+        <button class="widget" data-module="peticionamento">Automação de Peticionamento</button>
+        <button class="widget" data-module="suporte">Suporte ao Cliente</button>
+        <button class="widget" data-module="configuracoes">Configurações e Segurança</button>
+      </div>
+      <div id="module-details" class="module-details hidden"></div>
+    </section>
+
+    <section class="quick-actions">
+      <h2>Ações Rápidas</h2>
+      <div class="actions">
+        <button data-action="novo_cliente" class="btn">➕ Cadastrar cliente</button>
+        <button data-action="novo_processo" class="btn">➕ Cadastrar processo</button>
+        <button data-action="enviar_peticao" class="btn">📤 Enviar petição</button>
+        <button data-action="agendar_audiencia" class="btn">🗓️ Agendar audiência</button>
+        <button data-action="contato_cliente" class="btn">📞 Contatar cliente</button>
+        <button data-action="consultar_tribunal" class="btn">🏛️ Consultar tribunal</button>
+        <button data-action="gerar_relatorio" class="btn">🖨️ Gerar relatório</button>
+        <button data-action="exportar_dados" class="btn">📊 Exportar dados</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# PREDITIVA - Dependências Python
+# Instalar com: pip install -r requirements.txt
+
+# Análise de dados
+pandas>=1.5.0
+numpy>=1.21.0
+openpyxl>=3.0.0
+
+# Visualização
+matplotlib>=3.5.0
+seaborn>=0.11.0
+plotly>=5.0.0
+
+# Processamento de documentos
+PyPDF2>=3.0.0
+python-docx>=0.8.11
+reportlab>=3.6.0
+
+# Web e APIs
+flask>=2.0.0
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+
+# Banco de dados
+sqlite3
+
+# Utilitários
+python-dateutil>=2.8.0
+tabulate>=0.9.0
+
